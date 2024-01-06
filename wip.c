@@ -29,9 +29,44 @@ void pa(int *arr)
 	arr[0] = buf;
 }
 
+void	ra(int *arr)
+{
+	int	temp;
+	int	i;
+
+	temp = 0;
+	i = 0;
+	temp = arr[0];
+	while (i < MAX - 1)
+	{
+		arr[i] = arr[i + 1];
+		i++;
+	}
+	arr[MAX - 1] = temp;
+	printf("ra\n");
+}
+
+void	rra(int *arr)
+{
+	int	temp;
+	int	i;
+
+	temp = 0;
+	i = 0;
+	temp = arr[MAX - 1];
+	i = MAX - 1;
+	while (i > 0)
+	{
+		arr[i] = arr[i - 1];
+		i--;
+	}
+	arr[0] = temp;
+	printf("rra\n");
+}
+
 int	main(void)
 {
-	int	arr[MAX]= {3, 2};
+	int	arr [MAX] = {8,0};
 	int	buf;
 	int	i;
 
@@ -42,7 +77,7 @@ int	main(void)
 	if (done_checker(arr) == 1)
 		return (-1);
 	i = 0;
-	while (arr[i] && (i < MAX))
+	while (i < MAX)
 	{
 		printf("%d", arr[i]);
 		i++;
