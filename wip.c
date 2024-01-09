@@ -1,10 +1,12 @@
 #include <stdio.h>
-#define MAX 2
-typedef struct s_struct
+#define MAX 3
+
+typedef struct s_node
 {
-	int	*arr;
-	int	size;
-}	t_struct;
+	int				num;
+	int				index;
+	struct s_node	*next;
+}	t_node;
 
 int	done_checker(int *a)
 {
@@ -18,6 +20,35 @@ int	done_checker(int *a)
 		i++;
 	}
 	return (0);
+}
+
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	num;
+	int	neg;
+
+	i = 0;
+	num = 0;
+	neg = 1;
+	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\f' \
+		|| str[i] == '\t' || str[i] == '\v' || str[i] == '\r')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			neg = -neg;
+		i++;
+	}
+	while (str[i] != '\0')
+	{
+		if (ft_isdigit(str[i]))
+			num = num * 10 + (str[i] - '0');
+		else
+			break ;
+		i++;
+	}
+	return (num * neg);
 }
 
 void pa(int *arr)
@@ -64,16 +95,42 @@ void	rra(int *arr)
 	printf("rra\n");
 }
 
-int	main(void)
+void	sa(int *arr)
 {
-	int	arr [MAX] = {8,0};
-	int	buf;
+	int	temp;
 	int	i;
 
-	if (arr[1] < arr[0])
+	temp = 0;
+	i = 0;
+	temp = arr[0];
+	arr[0] = arr[1];
+	arr[1] = temp;
+	printf("sa\n");
+}
+
+int	main(int argc, char **argv)
+{
+	int	arr [MAX] = {4, 1, 8};
+	int	buf;
+	int	i;
+	t_node	stack_a;
+
+	i = 0;
+	while (argv[i + 1] && argc != 4)
 	{
-		pa(arr);
+		stack_a[i].num = ft_atoi(argv[i + 1]);
+		stack_a[i].index = i;
+		stack_a->
+		i++;
 	}
+	if (arr[0] < arr[1] && arr[0] > arr[2])
+		ra(arr);
+	if (arr[0] > arr[1])
+		sa(arr);
+	if (arr[1] > arr[2])
+		rra(arr);
+	if (arr[0] > arr[1])
+		sa(arr);
 	if (done_checker(arr) == 1)
 		return (-1);
 	i = 0;
