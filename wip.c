@@ -22,6 +22,13 @@ int	done_checker(int *a)
 	return (0);
 }
 
+int	ft_isdigit(int c)
+{
+	if ((c >= '0') && (c <= '9'))
+		return (1);
+	return (0);
+}
+
 int	ft_atoi(const char *str)
 {
 	int	i;
@@ -116,13 +123,12 @@ int	main(int argc, char **argv)
 	t_node	stack_a;
 
 	i = 0;
-	while (argv[i + 1] && argc != 4)
+/*	while (argv[i + 1] && argc != 4)
 	{
 		stack_a[i].num = ft_atoi(argv[i + 1]);
 		stack_a[i].index = i;
-		stack_a->
 		i++;
-	}
+	} */
 	if (arr[0] < arr[1] && arr[0] > arr[2])
 		ra(arr);
 	if (arr[0] > arr[1])
