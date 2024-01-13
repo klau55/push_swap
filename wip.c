@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 #define MAX 3
 
 typedef struct s_node
@@ -8,14 +10,14 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
-int	done_checker(int *a)
+int	done_checker(t_node *stack_a)
 {
 	int	i;
 
 	i = 0;
-	while (a[i + 1] && (i + 1 < MAX))
+	while (stack_a[i + 1].num && (i + 1 < MAX))
 	{
-		if (a[i + 1] < a[i])
+		if (stack_a[i + 1].num < stack_a[i].num)
 			return (1);
 		i++;
 	}
@@ -58,91 +60,106 @@ int	ft_atoi(const char *str)
 	return (num * neg);
 }
 
-void pa(int *arr)
+void pa(t_node *stack_a)
 {
 	int	buf;
 
-	buf = arr[1];
-	arr[1] = arr[0];
-	arr[0] = buf;
+	buf = stack_a[1].num;
+	stack_a[1].num = stack_a[0].num;
+	stack_a[0].num = buf;
 }
 
-void	ra(int *arr)
+void	ra(t_node *stack_a)
 {
 	int	temp;
 	int	i;
 
 	temp = 0;
 	i = 0;
-	temp = arr[0];
+	temp = stack_a[0].num;
 	while (i < MAX - 1)
 	{
-		arr[i] = arr[i + 1];
+		stack_a[i].num = stack_a[i + 1].num;
 		i++;
 	}
-	arr[MAX - 1] = temp;
+	stack_a[MAX - 1].num = temp;
 	printf("ra\n");
 }
 
-void	rra(int *arr)
+void	rra(t_node *stack_a)
 {
 	int	temp;
 	int	i;
 
 	temp = 0;
 	i = 0;
-	temp = arr[MAX - 1];
+	temp = stack_a[MAX - 1].num;
 	i = MAX - 1;
 	while (i > 0)
 	{
-		arr[i] = arr[i - 1];
+		stack_a[i].num = stack_a[i - 1].num;
 		i--;
 	}
-	arr[0] = temp;
+	stack_a[0].num = temp;
 	printf("rra\n");
 }
 
-void	sa(int *arr)
+void	sa(t_node *stack_a)
 {
 	int	temp;
 	int	i;
 
 	temp = 0;
 	i = 0;
-	temp = arr[0];
-	arr[0] = arr[1];
-	arr[1] = temp;
+	temp = stack_a[0].num;
+	stack_a[0].num = stack_a[1].num;
+	stack_a[1].num = temp;
 	printf("sa\n");
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	int	arr [MAX] = {4, 1, 8};
-	int	buf;
-	int	i;
-	t_node	stack_a;
+	int	*arr;
+	t_node	*stack_a;
+	int i;
 
+	arr = malloc((argc - 1) * sizeof(int));
+
+	if (arr == NULL)
+	{
+		fprintf(stderr, "Memory allocation failed\n");
+		return (1);
+	}
+	stack_a = malloc((argc - 1) * sizeof(t_node));
+	if (stack_a == NULL)
+	{
+		fprintf(stderr, "Memory allocation failed\n");
+		free(arr);
+		return (1);
+	}
 	i = 0;
-/*	while (argv[i + 1] && argc != 4)
+	while (argv[i + 1] && i < argc - 1)
 	{
 		stack_a[i].num = ft_atoi(argv[i + 1]);
 		stack_a[i].index = i;
 		i++;
-	} */
-	if (arr[0] < arr[1] && arr[0] > arr[2])
-		ra(arr);
-	if (arr[0] > arr[1])
-		sa(arr);
-	if (arr[1] > arr[2])
-		rra(arr);
-	if (arr[0] > arr[1])
-		sa(arr);
-	if (done_checker(arr) == 1)
+	}
+	if (!stack_a[0].num)
+		return (-1);
+	if (stack_a[0].num < stack_a[1].num && stack_a[0].num > stack_a[2].num)
+		ra(stack_a);
+	if (stack_a[0].num > stack_a[1].num)
+		sa(stack_a);
+	if (stack_a[1].num > stack_a[2].num)
+		rra(stack_a);
+	if (stack_a[0].num > stack_a[1].num)
+		sa(stack_a);
+	if (done_checker(stack_a) == 1)
 		return (-1);
 	i = 0;
 	while (i < MAX)
 	{
-		printf("%d", arr[i]);
+		printf("%d,", stack_a[i].num);
 		i++;
 	}
 	return (0);
