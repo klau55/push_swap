@@ -119,10 +119,15 @@ void	sa(t_node *stack_a)
 
 int main(int argc, char **argv)
 {
-	int	*arr;
+	int		*arr;
 	t_node	*stack_a;
-	int i;
+	int		i;
 
+
+	if (argc == 2)
+		return (printf("%d\n", ft_atoi(argv[1])));
+	if (argc < 3 || argc > 4)
+		return (printf("no go, only 1 to 3 digits accepted\n"));
 	arr = malloc((argc - 1) * sizeof(int));
 
 	if (arr == NULL)
@@ -144,21 +149,33 @@ int main(int argc, char **argv)
 		stack_a[i].index = i;
 		i++;
 	}
-	if (!stack_a[0].num)
-		return (-1);
-	if (stack_a[0].num < stack_a[1].num && stack_a[0].num > stack_a[2].num)
-		ra(stack_a);
-	if (stack_a[0].num > stack_a[1].num)
-		sa(stack_a);
-	if (stack_a[1].num > stack_a[2].num)
-		rra(stack_a);
-	if (stack_a[0].num > stack_a[1].num)
-		sa(stack_a);
-	if (done_checker(stack_a) == 1)
-		return (-1);
-	i = 0;
-	while (i < MAX)
+	if (argc == 3)
 	{
+		if (!stack_a[0].num)
+			return (-1);
+		if (stack_a[0].num > stack_a[1].num)
+			pa(stack_a);
+	}
+	if (argc == 4)
+	{
+		if (!stack_a[0].num)
+			return (-1);
+		if (stack_a[0].num < stack_a[1].num && stack_a[0].num > stack_a[2].num)
+			ra(stack_a);
+		if (stack_a[0].num > stack_a[1].num)
+			sa(stack_a);
+		if (stack_a[1].num > stack_a[2].num)
+			rra(stack_a);
+		if (stack_a[0].num > stack_a[1].num)
+			sa(stack_a);
+		if (done_checker(stack_a) == 1)
+			return (-1);
+	}
+
+	i = 0;
+	while (i < (argc - 1))
+	{
+//		printf("%d---\n", i);
 		printf("%d,", stack_a[i].num);
 		i++;
 	}
