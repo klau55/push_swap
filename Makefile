@@ -1,7 +1,7 @@
-SRCS = operations.c push_swap.c node_ops.c
+SRCS = operations.c push_swap.c node_ops.c helpers.c costs.c
 OBJ = $(SRCS:.c=.o)
 NAME = push_swap.a
-CC = cc
+CC = cc -g
 CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)

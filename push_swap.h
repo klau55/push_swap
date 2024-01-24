@@ -11,6 +11,8 @@ typedef struct s_node
 {
 	int				num;
 	int				index;
+	int				cost_a;
+	int				cost_b;
 	struct s_node	*next;
 }	t_node;
 
@@ -37,15 +39,21 @@ t_node		*find_back(t_node *node);
 void		push_front(t_node **head, int num);
 void		push_back(t_node *head, int num);
 void		rotate_front(t_node **head);
-
+void		rotate_back(t_node **head);
+void		pop_front(t_node **head);
+int			distance(t_node *first, t_node *last);
+t_node		*back(t_node *node);
+int			len(t_node *head);
 
 
 int			done_checker(t_node *stack_a);
 int			ft_isdigit(int c);
 int			ft_atoi(const char *str);
 int			two(t_node *stack_a);
-int			three(t_node *stack_a);
+int			three(t_node **stack_a);
 int			four_to_n(t_node *stack_a, t_node *stack_b);
 int			main(int argc, char **argv);
+
+t_node		*populate_node(int argc, char **argv);
 
 #endif

@@ -56,21 +56,20 @@ void	rr(t_node *stack_a, t_node *stack_b)
 	printf("rr");
 }
 
-void	rra(t_node *stack_a)
+void	rra(t_node **head)
 {
-	int	temp;
-	int	i;
+	t_node	*last;
 
-	temp = 0;
-	i = 0;
-	temp = stack_a[MAX - 1].num;
-	i = MAX - 1;
-	while (i > 0)
-	{
-		stack_a[i].num = stack_a[i - 1].num;
-		i--;
-	}
-	stack_a[0].num = temp;
+	last = find_back(*head);
+	if (*head == NULL || last == *head)
+		return ;
+	at_ind(*head, last->index - 1)->next = NULL;
+	last->next = *head;
+
+	*head = last;
+	(*head)->index = 0;
+	increment_indexes((*head)->next);
+
 	printf("rra\n");
 }
 

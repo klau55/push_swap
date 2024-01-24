@@ -8,6 +8,17 @@ void	swap_values(t_node *a, t_node *b)
 	a->num = b->num;
 	b->num = tmp;
 }
+t_node *at_ind(t_node *head, int index)
+{
+	t_node	*node;
+
+	node = head;
+	while (node->index != index && node->next != NULL)
+	{
+		node = node->next;
+	}
+	return (node);
+}
 
 void	swap_indexes(t_node *a, t_node *b)
 {
@@ -148,3 +159,31 @@ void	pop_front(t_node **head)
 	decrement_indexes(*head);
 	free(front);
 }
+
+t_node	*back(t_node *node)
+{
+	while (node && node->next != NULL)
+		node = node->next;
+	return (node);
+}
+
+int	distance(t_node *first, t_node *last)
+{
+	int	res;
+
+	res = 0;
+	while (first && first != last)
+	{
+		res++;
+		first = first->next;
+	}
+	return (res);
+}
+
+int	len(t_node *head)
+{
+	if (!head)
+		return (0);
+	return (distance(head, back(head)) + 1);
+}
+
