@@ -4,11 +4,14 @@ void	swap_values(t_node *a, t_node *b)
 {
 	int	tmp;
 
+	if (a == NULL || b == NULL)
+		return ;
 	tmp = a->num;
 	a->num = b->num;
 	b->num = tmp;
 }
-t_node *at_ind(t_node *head, int index)
+
+t_node	*at_ind(t_node *head, int index)
 {
 	t_node	*node;
 
@@ -24,6 +27,8 @@ void	swap_indexes(t_node *a, t_node *b)
 {
 	int	tmp;
 
+	if (a == NULL || b == NULL)
+		return ;
 	tmp = a->index;
 	a->index = b->index;
 	b->index = tmp;
@@ -123,29 +128,29 @@ void	rotate_front(t_node **head)
 	last = find_back(*head);
 	if (*head == NULL || last == *head)
 		return ;
-	findby_index(*head, last->index -1)->next = NULL;
+	findby_index(*head, len(*head) - 2)->next = NULL;
 	last->next = *head;
 	*head = last;
-	(*head)->index = 0;
-	increment_indexes((*head)->next);
+	//(*head)->index = 0;
+	//increment_indexes((*head)->next);
 }
 
 void	rotate_back(t_node **head)
 {
 	t_node	*last;
 	t_node	*temp;
-	int		last_ind;
+	//int		last_ind;
 
 	if (*head == NULL || (*head)->next == NULL)
 		return ;
 	temp = *head;
 	*head = (*head)->next;
 	last = find_back(*head);
-	last_ind = last->index;
+	//last_ind = last->index;
 	temp->next = NULL;
 	last->next = temp;
-	decrement_indexes(*head);
-	find_back(*head)->index = last_ind;
+	//decrement_indexes(*head);
+	//find_back(*head)->index = last_ind;
 }
 
 void	pop_front(t_node **head)
@@ -187,3 +192,17 @@ int	len(t_node *head)
 	return (distance(head, back(head)) + 1);
 }
 
+void set_indexes(t_node *head)
+{
+	t_node	*node;
+	int		i;
+
+	i = 0;
+	node = head;
+	while (node)
+	{
+		node->index = i;
+		i++;
+		node = node->next;
+	}
+}

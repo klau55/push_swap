@@ -54,5 +54,11 @@ t_node	*populate_node(int argc, char **argv)
 			push_back(head, (int)nb);
 		i++;
 	}
+	/*while (head)
+	{
+		printf("NUMBER %d, INDEX %d\n", head->num, head->index);
+		head = head->next;
+	}*/
+	set_indexes(head);
 	return (head);
 }

@@ -1,24 +1,21 @@
 #include "push_swap.h"
 
-int	done_checker(t_node *stack_a)
+int	done_checker(t_node *stack)
 {
-	int	i;
-
-	i = 0;
-	while (stack_a[i + 1].num && (i + 1 < MAX))
+	while (stack->next != NULL)
 	{
-		if (stack_a[i + 1].num < stack_a[i].num)
+		if (stack->num > stack->next->num)
 			return (1);
-		i++;
+		stack = stack->next;
 	}
 	return (0);
 }
 
 int two(t_node *stack_a)
 {
-	if (!stack_a[0].num)
+	if (!stack_a->num)
 		return (-1);
-	if (stack_a[0].num > stack_a[1].num)
+	if (stack_a->num > stack_a->next->num)
 		sa(stack_a);
 	return (0);
 }
@@ -28,11 +25,11 @@ int	three(t_node **stack)
 	printf("?%d %d %d \n", (*stack)->num, (*stack)->next->num, back(*stack)->num);
 	if ((*stack)->num > (*stack)->next->num \
 		&& (*stack)->num > back(*stack)->num)
-		ra(*stack);
+		ra(stack);
 	if ((*stack)->num > (*stack)->next->num)
 		sa(*stack);
 	if ((*stack)->next->num > back(*stack)->num)
-		rra(*stack);
+		rra(stack);
 	if ((*stack)->num > (*stack)->next->num)
 		sa(*stack);
 	if (done_checker(*stack) == 1)
@@ -40,7 +37,7 @@ int	three(t_node **stack)
 		printf("*three fails\n");
 		return (-1);
 	}
-	printf("*three exit\n");
+	printf("*three exit sucks ess\n");
 	return (0);
 	/*
 	printf("stack_a[0].num = %d, stack_a[1].num = %d,\
@@ -74,12 +71,23 @@ int four_to_n(t_node *stack_a, t_node *stack_b)
 	return (-1);
 }
 
+void	govno(t_node *stack_a)
+{
+	while (stack_a->num)
+	{
+		printf("zhopa zhopa OUT: %d INDEX: %d\n", stack_a->num, stack_a->index);
+		if (stack_a->next && stack_a->num)
+			stack_a = stack_a->next;
+		else
+			break ;
+	}
+}
+
 int main(int argc, char **argv)
 {
 	int		*arr;
 	t_node	*stack_a;
 	t_node	*stack_b;
-	int		i;
 	int		stack_len;
 	t_node	*head;
 
@@ -108,7 +116,7 @@ int main(int argc, char **argv)
 	stack_len = len(stack_a);
 	head = stack_a;
 	printf("===stack_a[0].num = %d, stack_a[1].num = %d,\
-	 stack_a[2].num = %d\n", stack_a[0].num, stack_a[1].num, stack_a[2].num);
+	 stack_a[2].num = %d\n", stack_a->num, stack_a->next->num, stack_a->next->next->num);
 	while (stack_a->num)
 	{
 		printf("===%d\n", stack_a->num);
@@ -117,17 +125,6 @@ int main(int argc, char **argv)
 		else
 			break ;
 	}
-/*
-	i = 0;
-	while (argv[i + 1] && i < argc - 1)
-	{
-		if (1 == ft_isdigit((char)argv[i + 1]))
-			return (printf("Only digits allowed, why put %s?\n", argv[i + 1]));
-		stack_a[i].num = ft_atoi(argv[i + 1]);
-		stack_a[i].index = i;
-//		printf("*stack number %d num: %d, index: %d\n", i, stack_a[i].num, stack_a[i].index);
-		i++;
-	}*/
 	stack_a = head;
 	if (argc == 3)
 	{
@@ -143,35 +140,13 @@ int main(int argc, char **argv)
 		}
 		else
 			three(&stack_a);
-/*		if (-1 == three(stack_a) && printf("aaaaaaaaa") > 0)
-		{
-			printf("sasasa");
-			return (-1);
-		}
-		else
-			printf("ASS"); */
 	}
-	stack_a = head;
-	while (stack_a->num)
-	{
-		printf("===%d\n", stack_a->num);
-		if (stack_a->next)
-			stack_a = stack_a->next;
-		else
-			break ;
-	}
-	if (argc == 5)
+	else if (argc == 5)
 	{
 		stack_b = NULL;
 		if (-1 == four_to_n(stack_a, stack_b))
 			return (-1);
 	}
-	i = 0;
-	stack_a = head;
-	while (stack_a)
-	{
-		printf("out ===%d\n", stack_a->num);
-		stack_a = stack_a->next;
-	}
+	govno(stack_a);
 	return (0);
 }

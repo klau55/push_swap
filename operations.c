@@ -16,115 +16,60 @@ void	pb(t_node **stack_b, t_node *stack_a)
 	write(1, "pb\n", 3);
 }
 
-void	ra(t_node *stack_a)
+void	ra(t_node **stack_a)
 {
-	int	temp;
-	int	i;
-
-	temp = 0;
-	i = 0;
-	temp = stack_a[0].num;
-	while (i < MAX - 1)
-	{
-		stack_a[i].num = stack_a[i + 1].num;
-		i++;
-	}
-	stack_a[MAX - 1].num = temp;
+	rotate_back(stack_a);
 	printf("ra\n");
 }
 
-void	rb(t_node *stack_b)
+void	rb(t_node **stack_b)
 {
-	int	temp;
-	int	i;
-
-	temp = 0;
-	i = 0;
-	temp = stack_b[0].num;
-	while (i < MAX - 1)
-	{
-		stack_b[i].num = stack_b[i + 1].num;
-		i++;
-	}
-	stack_b[MAX - 1].num = temp;
+	rotate_back(stack_b);
 	printf("rb\n");
 }
-void	rr(t_node *stack_a, t_node *stack_b)
+void	rr(t_node **stack_a, t_node **stack_b)
 {
-	ra(stack_a);
-	rb(stack_b);
+	rotate_back(stack_a);
+	rotate_back(stack_b);
 	printf("rr");
 }
 
-void	rra(t_node **head)
+void	rra(t_node **stack_a)
 {
-	t_node	*last;
-
-	last = find_back(*head);
-	if (*head == NULL || last == *head)
-		return ;
-	at_ind(*head, last->index - 1)->next = NULL;
-	last->next = *head;
-
-	*head = last;
-	(*head)->index = 0;
-	increment_indexes((*head)->next);
-
+	rotate_front(stack_a);
 	printf("rra\n");
 }
 
-void	rrb(t_node *stack_b)
+void	rrb(t_node **stack_b)
 {
-	int	temp;
-	int	i;
-
-	temp = 0;
-	i = 0;
-	temp = stack_b[MAX - 1].num;
-	i = MAX - 1;
-	while (i > 0)
-	{
-		stack_b[i].num = stack_b[i - 1].num;
-		i--;
-	}
-	stack_b[0].num = temp;
+	rotate_front(stack_b);
 	printf("rrb\n");
 }
 
-void	rrr(t_node *stack_a, t_node *stack_b)
+void	rrr(t_node **stack_a, t_node **stack_b)
 {
-	rra(stack_a);
-	rrb(stack_b);
+	rotate_front(stack_a);
+	rotate_front(stack_b);
 	printf("rrr");
 }
 
 void	sa(t_node *stack_a)
 {
-	int	temp;
-	int	i;
-
-	temp = 0;
-	i = 0;
-	temp = stack_a[0].num;
-	stack_a[0].num = stack_a[1].num;
-	stack_a[1].num = temp;
+	swap_values(stack_a, stack_a->next);
+	swap_indexes(stack_a, stack_a->next);
 	printf("sa\n");
 }
 void	sb(t_node *stack_b)
 {
-	int	temp;
-	int	i;
-
-	temp = 0;
-	i = 0;
-	temp = stack_b[0].num;
-	stack_b[0].num = stack_b[1].num;
-	stack_b[1].num = temp;
+	swap_values(stack_b, stack_b->next);
+	swap_indexes(stack_b, stack_b->next);
 	printf("sb\n");
 }
 void ss(t_node *stack_a, t_node *stack_b)
 {
-	sa(stack_a);
-	sb(stack_b);
+	swap_values(stack_a, stack_a->next);
+	swap_indexes(stack_a, stack_a->next);
+	swap_values(stack_b, stack_b->next);
+	swap_indexes(stack_b, stack_b->next);
 	printf("ss");
 }

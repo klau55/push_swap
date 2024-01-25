@@ -11,8 +11,6 @@ typedef struct s_node
 {
 	int				num;
 	int				index;
-	int				cost_a;
-	int				cost_b;
 	struct s_node	*next;
 }	t_node;
 
@@ -21,12 +19,12 @@ void		sb(t_node *stack_b);
 void		ss(t_node *stack_a, t_node *stack_b);
 void		pa(t_node **stack_a, t_node *stack_b);
 void		pb(t_node **stack_b, t_node *stack_a);
-void		ra(t_node *stack_a);
-void		rb(t_node *stack_b);
-void		rr(t_node *stack_a, t_node *stack_b);
-void		rra(t_node *stack_a);
-void		rrb(t_node *stack_b);
-void		rrr(t_node *stack_a, t_node *stack_b);
+void		ra(t_node **stack_a);
+void		rb(t_node **stack_b);
+void		rr(t_node **stack_a, t_node **stack_b);
+void		rra(t_node **stack_a);
+void		rrb(t_node **stack_b);
+void		rrr(t_node **stack_a, t_node **stack_b);
 
 
 void		swap_values(t_node *a, t_node *b);
@@ -44,7 +42,8 @@ void		pop_front(t_node **head);
 int			distance(t_node *first, t_node *last);
 t_node		*back(t_node *node);
 int			len(t_node *head);
-
+t_node		*at_ind(t_node *head, int index);
+void		set_indexes(t_node *head);
 
 int			done_checker(t_node *stack_a);
 int			ft_isdigit(int c);
