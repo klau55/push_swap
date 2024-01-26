@@ -75,7 +75,7 @@ void	decrement_indexes(t_node *tail)
 {
 	while (tail)
 	{
-		(tail->index)++;
+		(tail->index)--;
 		tail = tail->next;
 	}
 }
@@ -131,26 +131,26 @@ void	rotate_front(t_node **head)
 	findby_index(*head, len(*head) - 2)->next = NULL;
 	last->next = *head;
 	*head = last;
-	//(*head)->index = 0;
-	//increment_indexes((*head)->next);
+	(*head)->index = 0;
+	increment_indexes((*head)->next);
 }
 
 void	rotate_back(t_node **head)
 {
 	t_node	*last;
 	t_node	*temp;
-	//int		last_ind;
+	int		last_ind;
 
 	if (*head == NULL || (*head)->next == NULL)
 		return ;
 	temp = *head;
 	*head = (*head)->next;
 	last = find_back(*head);
-	//last_ind = last->index;
+	last_ind = last->index;
 	temp->next = NULL;
 	last->next = temp;
-	//decrement_indexes(*head);
-	//find_back(*head)->index = last_ind;
+	decrement_indexes(*head);
+	find_back(*head)->index = last_ind;
 }
 
 void	pop_front(t_node **head)

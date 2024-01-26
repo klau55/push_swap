@@ -11,7 +11,7 @@ int	done_checker(t_node *stack)
 	return (0);
 }
 
-int two(t_node *stack_a)
+int	two(t_node *stack_a)
 {
 	if (!stack_a->num)
 		return (-1);
@@ -39,39 +39,16 @@ int	three(t_node **stack)
 	}
 	printf("*three exit sucks ess\n");
 	return (0);
-	/*
-	printf("stack_a[0].num = %d, stack_a[1].num = %d,\
-	 stack_a[2].num = %d\n", stack_a[0].num, stack_a[1].num, stack_a[2].num);
-	if (!stack_a[0].num)
-		return (-1);
-	if (stack_a[0].num < stack_a[1].num && stack_a[0].num > stack_a[2].num)
-		ra(stack_a);
-	if (stack_a[0].num > stack_a[1].num)
-		sa(stack_a);
-	if (stack_a[1].num > stack_a[2].num)
-		rra(stack_a);
-	if (stack_a[0].num > stack_a[1].num)
-		sa(stack_a);
-	if (done_checker(stack_a) == 1)
-	{
-		printf("*three fails\n");
-		return (-1);
-	}
-	else
-	{
-		printf("*three done\n");
-		return (0);
-	}*/
 }
 
-int four_to_n(t_node *stack_a, t_node *stack_b)
+int	four_to_n(t_node *stack_a, t_node *stack_b)
 {
 	stack_a = NULL;
 	stack_b = NULL;
 	return (-1);
 }
 
-void	govno(t_node *stack_a)
+void	out(t_node *stack_a)
 {
 	while (stack_a->num)
 	{
@@ -116,16 +93,8 @@ int main(int argc, char **argv)
 	stack_len = len(stack_a);
 	head = stack_a;
 	printf("===stack_a[0].num = %d, stack_a[1].num = %d,\
-	 stack_a[2].num = %d\n", stack_a->num, stack_a->next->num, stack_a->next->next->num);
-	while (stack_a->num)
-	{
-		printf("===%d\n", stack_a->num);
-		if (stack_a->next)
-			stack_a = stack_a->next;
-		else
-			break ;
-	}
-	stack_a = head;
+	 stack_a[2].num = %d\n", \
+	stack_a->num, stack_a->next->num, stack_a->next->next->num);
 	if (argc == 3)
 	{
 		if (-1 == two(stack_a))
@@ -136,7 +105,7 @@ int main(int argc, char **argv)
 		printf("*entered if for 3\n");
 		if (done_checker(stack_a) == 0)
 		{
-			printf("no sort needed\n");
+			printf("no sort needed, exit 3\n");
 		}
 		else
 			three(&stack_a);
@@ -147,6 +116,6 @@ int main(int argc, char **argv)
 		if (-1 == four_to_n(stack_a, stack_b))
 			return (-1);
 	}
-	govno(stack_a);
+	out(stack_a);
 	return (0);
 }

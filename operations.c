@@ -56,20 +56,20 @@ void	rrr(t_node **stack_a, t_node **stack_b)
 void	sa(t_node *stack_a)
 {
 	swap_values(stack_a, stack_a->next);
-	swap_indexes(stack_a, stack_a->next);
+	//swap_indexes(stack_a, stack_a->next);
 	printf("sa\n");
 }
 void	sb(t_node *stack_b)
 {
 	swap_values(stack_b, stack_b->next);
-	swap_indexes(stack_b, stack_b->next);
+	//swap_indexes(stack_b, stack_b->next);
 	printf("sb\n");
 }
 void ss(t_node *stack_a, t_node *stack_b)
 {
 	swap_values(stack_a, stack_a->next);
-	swap_indexes(stack_a, stack_a->next);
+	//swap_indexes(stack_a, stack_a->next);
 	swap_values(stack_b, stack_b->next);
-	swap_indexes(stack_b, stack_b->next);
+	//swap_indexes(stack_b, stack_b->next);
 	printf("ss");
 }

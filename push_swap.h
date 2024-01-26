@@ -51,8 +51,9 @@ int			ft_atoi(const char *str);
 int			two(t_node *stack_a);
 int			three(t_node **stack_a);
 int			four_to_n(t_node *stack_a, t_node *stack_b);
-int			main(int argc, char **argv);
+void		out(t_node *stack_a);
 
+int			main(int argc, char **argv);
 t_node		*populate_node(int argc, char **argv);
 
 #endif
