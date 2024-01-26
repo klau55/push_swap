@@ -22,7 +22,6 @@ int	two(t_node *stack_a)
 
 int	three(t_node **stack)
 {
-	printf("?%d %d %d \n", (*stack)->num, (*stack)->next->num, back(*stack)->num);
 	if ((*stack)->num > (*stack)->next->num \
 		&& (*stack)->num > back(*stack)->num)
 		ra(stack);
@@ -41,13 +40,6 @@ int	three(t_node **stack)
 	return (0);
 }
 
-int	four_to_n(t_node *stack_a, t_node *stack_b)
-{
-	stack_a = NULL;
-	stack_b = NULL;
-	return (-1);
-}
-
 void	out(t_node *stack_a)
 {
 	while (stack_a->num)
@@ -62,7 +54,6 @@ void	out(t_node *stack_a)
 
 int main(int argc, char **argv)
 {
-	int		*arr;
 	t_node	*stack_a;
 	t_node	*stack_b;
 	int		stack_len;
@@ -72,22 +63,8 @@ int main(int argc, char **argv)
 		return (0);
 	if (argc == 2)
 		return (printf("%d\n", ft_atoi(argv[1])));
-	if (argc < 3 || argc > 4)
+	if (argc < 3 || argc > 5)
 		return (printf("no go, only 1 to 3 digits accepted\n"));
-	arr = malloc((argc - 1) * sizeof(int));
-
-	if (arr == NULL)
-	{
-		fprintf(stderr, "Memory allocation failed\n");
-		return (1);
-	}
-	stack_a = malloc((argc - 1) * sizeof(t_node));
-	if (stack_a == NULL)
-	{
-		fprintf(stderr, "Memory allocation failed\n");
-		free(arr);
-		return (1);
-	}
 	stack_a = populate_node(argc, argv);
 	stack_b = NULL;
 	stack_len = len(stack_a);
@@ -113,7 +90,7 @@ int main(int argc, char **argv)
 	else if (argc == 5)
 	{
 		stack_b = NULL;
-		if (-1 == four_to_n(stack_a, stack_b))
+		if (-1 == four_to_n(&stack_a, &stack_b))
 			return (-1);
 	}
 	out(stack_a);

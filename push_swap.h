@@ -17,8 +17,8 @@ typedef struct s_node
 void		sa(t_node *stack_a);
 void		sb(t_node *stack_b);
 void		ss(t_node *stack_a, t_node *stack_b);
-void		pa(t_node **stack_a, t_node *stack_b);
-void		pb(t_node **stack_b, t_node *stack_a);
+void		pa(t_node **stack_a, t_node **stack_b);
+void		pb(t_node **stack_b, t_node **stack_a);
 void		ra(t_node **stack_a);
 void		rb(t_node **stack_b);
 void		rr(t_node **stack_a, t_node **stack_b);
@@ -50,7 +50,7 @@ int			ft_isdigit(int c);
 int			ft_atoi(const char *str);
 int			two(t_node *stack_a);
 int			three(t_node **stack_a);
-int			four_to_n(t_node *stack_a, t_node *stack_b);
+int			four_to_n(t_node **stack_a, t_node **stack_b);
 void		out(t_node *stack_a);
 
 int			main(int argc, char **argv);

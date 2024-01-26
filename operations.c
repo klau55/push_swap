@@ -1,18 +1,19 @@
 #include "push_swap.h"
 
-void	pa(t_node **stack_a, t_node *stack_b)
+void	pa(t_node **stack_a, t_node **stack_b)
 {
 	if (stack_b == NULL)
 		return ;
-	push_front(stack_a, stack_b->num);
+	push_front(stack_a, (*stack_b)->num);
 	write(1, "pa\n", 3);
 }
 
-void	pb(t_node **stack_b, t_node *stack_a)
+void	pb(t_node **stack_b, t_node **stack_a)
 {
-	if (stack_b == NULL)
+	if (stack_a == NULL)
 		return ;
-	push_front(stack_b, stack_a->num);
+	push_front(stack_b, (*stack_a)->num);
+	pop_front(stack_a);
 	write(1, "pb\n", 3);
 }
 

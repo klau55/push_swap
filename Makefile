@@ -1,4 +1,4 @@
-SRCS = operations.c push_swap.c node_ops.c helpers.c costs.c
+SRCS = operations.c push_swap.c node_ops.c helpers.c costs.c 4_to_n.c
 OBJ = $(SRCS:.c=.o)
 NAME = push_swap
 CC = cc -g
