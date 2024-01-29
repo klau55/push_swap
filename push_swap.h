@@ -4,13 +4,17 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-
-# define MAX 3
+# include <stdbool.h>
+# include <limits.h>
 
 typedef struct s_node
 {
 	int				num;
 	int				index;
+	bool			top_part;
+	bool			cheapest;
+	struct s_node	*target_node;
+	int				push_price;
 	struct s_node	*next;
 }	t_node;
 
@@ -25,7 +29,6 @@ void		rr(t_node **stack_a, t_node **stack_b);
 void		rra(t_node **stack_a);
 void		rrb(t_node **stack_b);
 void		rrr(t_node **stack_a, t_node **stack_b);
-
 
 void		swap_values(t_node *a, t_node *b);
 void		swap_indexes(t_node *a, t_node *b);

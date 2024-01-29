@@ -87,7 +87,7 @@ int main(int argc, char **argv)
 		else
 			three(&stack_a);
 	}
-	else if (argc == 5)
+	else if (argc > 4)
 	{
 		stack_b = NULL;
 		if (-1 == four_to_n(&stack_a, &stack_b))
