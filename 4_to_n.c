@@ -1,5 +1,26 @@
 #include "push_swap.h"
 
+void	set_position(t_node *stack)
+{
+	int	i;
+	int	center_line;
+
+	if (stack == NULL)
+		return ;
+	center_line = len(stack) / 2;
+	i = 0;
+	while (stack)
+	{
+		stack->index = i;
+		if (i <= center_line)
+			stack->top_part = true;
+		else
+			stack->top_part = false;
+		stack = stack->next;
+		i++;
+	}
+}
+
 static void	rotate_both(t_node **a, t_node **b, t_node *cheapest_node)
 {
 	while (*a != cheapest_node->target_node && *b != cheapest_node)
@@ -78,8 +99,8 @@ void	set_price(t_node *a, t_node *b)
 	int	len_a;
 	int	len_b;
 
-	len_a = stack_len(a);
-	len_b = stack_len(b);
+	len_a = len(a);
+	len_b = len(b);
 	while (b)
 	{
 		b->push_price = b->index;
@@ -142,26 +163,7 @@ static void	set_target_node(t_node *a, t_node *b)
 	}
 }
 
-void	set_position(t_node *stack)
-{
-	int	i;
-	int	center_line;
 
-	if (stack == NULL)
-		return ;
-	center_line = stack_len(stack) / 2;
-	i = 0;
-	while (stack)
-	{
-		stack->index = i;
-		if (i <= center_line)
-			stack->top_part = true;
-		else
-			stack->top_part = false;
-		stack = stack->next;
-		i++;
-	}
-}
 
 void	init_nodes(t_node *a, t_node *b)
 {
@@ -180,9 +182,9 @@ static void	move_nodes(t_node **a, t_node **b)
 	if (cheapest_node->top_part && cheapest_node->target_node->top_part)
 		rotate_both(a, b, cheapest_node);
 	else if (!(cheapest_node->top_part) && !(cheapest_node->target_node->top_part))
-		reverse_rotate_both(a, b, cheapest_node);
-	finish_rotation(b, cheapest_node, 'a');
-	finish_rotation(b, cheapest_node->target_node, 'b');
+		rev_rotate_both(a, b, cheapest_node);
+	finish_rotation(b, cheapest_node, 'b');
+	finish_rotation(a, cheapest_node->target_node, 'a');
 	pa(a, b);
 }
 

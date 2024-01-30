@@ -43,6 +43,9 @@ t_node	*new_node(int num)
 		return (NULL);
 	new->num = num;
 	new->index = 0;
+	new->top_part = true;
+	new->cheapest = false;
+	new->push_price = 0;
 	new->next = NULL;
 	return (new);
 }
@@ -157,7 +160,7 @@ void	pop_front(t_node **head)
 {
 	t_node	*front;
 
-	if (*head == NULL || (*head)->next == NULL)
+	if (*head == NULL)
 		return ;
 	front = *head;
 	*head = (*head)->next;

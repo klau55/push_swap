@@ -16,7 +16,7 @@ int	two(t_node *stack_a)
 	if (!stack_a->num)
 		return (-1);
 	if (stack_a->num > stack_a->next->num)
-		sa(stack_a);
+		sa(&stack_a);
 	return (0);
 }
 
@@ -26,11 +26,11 @@ int	three(t_node **stack)
 		&& (*stack)->num > back(*stack)->num)
 		ra(stack);
 	if ((*stack)->num > (*stack)->next->num)
-		sa(*stack);
+		sa(stack);
 	if ((*stack)->next->num > back(*stack)->num)
 		rra(stack);
 	if ((*stack)->num > (*stack)->next->num)
-		sa(*stack);
+		sa(stack);
 	if (done_checker(*stack) == 1)
 	{
 		printf("*three fails\n");
@@ -42,13 +42,10 @@ int	three(t_node **stack)
 
 void	out(t_node *stack_a)
 {
-	while (stack_a->num)
+	while (stack_a)
 	{
 		printf("zhopa zhopa OUT: %d INDEX: %d\n", stack_a->num, stack_a->index);
-		if (stack_a->next && stack_a->num)
-			stack_a = stack_a->next;
-		else
-			break ;
+		stack_a = stack_a->next;
 	}
 }
 
@@ -63,15 +60,12 @@ int main(int argc, char **argv)
 		return (0);
 	if (argc == 2)
 		return (printf("%d\n", ft_atoi(argv[1])));
-	if (argc < 3 || argc > 5)
-		return (printf("no go, only 1 to 3 digits accepted\n"));
+	if (argc < 2)
+		return (printf("no go\n"));
 	stack_a = populate_node(argc, argv);
 	stack_b = NULL;
 	stack_len = len(stack_a);
 	head = stack_a;
-	printf("===stack_a[0].num = %d, stack_a[1].num = %d,\
-	 stack_a[2].num = %d\n", \
-	stack_a->num, stack_a->next->num, stack_a->next->next->num);
 	if (argc == 3)
 	{
 		if (-1 == two(stack_a))

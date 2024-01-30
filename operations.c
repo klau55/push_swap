@@ -5,6 +5,7 @@ void	pa(t_node **stack_a, t_node **stack_b)
 	if (stack_b == NULL)
 		return ;
 	push_front(stack_a, (*stack_b)->num);
+	pop_front(stack_b);
 	write(1, "pa\n", 3);
 }
 
@@ -54,9 +55,9 @@ void	rrr(t_node **stack_a, t_node **stack_b)
 	printf("rrr");
 }
 
-void	sa(t_node *stack_a)
+void	sa(t_node **stack_a)
 {
-	swap_values(stack_a, stack_a->next);
+	swap_values(*stack_a, (*stack_a)->next);
 	//swap_indexes(stack_a, stack_a->next);
 	printf("sa\n");
 }

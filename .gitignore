@@ -4,3 +4,5 @@ tasks.json
 settings.json
 *.o
 push_swap
+a.out.dSYM/Contents/Info.plist
+a.out.dSYM/

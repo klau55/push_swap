@@ -18,7 +18,7 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
-void		sa(t_node *stack_a);
+void		sa(t_node **stack_a);
 void		sb(t_node *stack_b);
 void		ss(t_node *stack_a, t_node *stack_b);
 void		pa(t_node **stack_a, t_node **stack_b);
