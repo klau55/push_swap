@@ -56,24 +56,23 @@ int main(int argc, char **argv)
 	int		stack_len;
 	t_node	*head;
 
-	if (argc < 2)
-		return (0);
-	if (argc == 2)
-		return (printf("%d\n", ft_atoi(argv[1])));
-	if (argc < 2)
+	if (argc < 2 || (argc == 2 && !argv[1][0]))
 		return (printf("no go\n"));
-	stack_a = populate_node(argc, argv);
+	if (argc == 2)
+	{
+		argv = ft_split(argv[1], ' ');
+	}
+	else
+		argv = argv + 1;
+	stack_a = populate_node(argv);
 	stack_b = NULL;
 	stack_len = len(stack_a);
 	head = stack_a;
-	if (argc == 3)
+	if (stack_len == 1)
+		return (printf("OUT: %d INDEX: 0\n", stack_a->num));
+	else if (stack_len == 3 || stack_len == 2)
 	{
-		if (-1 == two(stack_a))
-			return (-1);
-	}
-	else if (argc == 4)
-	{
-		printf("*entered if for 3\n");
+		printf("*entered if for 2/3\n");
 		if (done_checker(stack_a) == 0)
 		{
 			printf("no sort needed, exit 3\n");
@@ -81,12 +80,12 @@ int main(int argc, char **argv)
 		else
 			three(&stack_a);
 	}
-	else if (argc > 4)
+	else if (stack_len > 4)
 	{
-		stack_b = NULL;
 		if (-1 == four_to_n(&stack_a, &stack_b))
 			return (-1);
 	}
 	out(stack_a);
+	//TODO: free stack
 	return (0);
 }

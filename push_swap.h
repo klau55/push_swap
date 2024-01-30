@@ -56,7 +56,10 @@ int			three(t_node **stack_a);
 int			four_to_n(t_node **stack_a, t_node **stack_b);
 void		out(t_node *stack_a);
 
+char		**ft_split(char *s, char c);
+
+
 int			main(int argc, char **argv);
-t_node		*populate_node(int argc, char **argv);
+t_node		*populate_node(char **argv);
 
 #endif

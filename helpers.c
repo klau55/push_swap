@@ -36,7 +36,7 @@ int	ft_atoi(const char *str)
 	return (num * neg);
 }
 
-t_node	*populate_node(int argc, char **argv)
+t_node	*populate_node(char **argv)
 {
 	t_node		*head;
 	long int	nb;
@@ -44,11 +44,11 @@ t_node	*populate_node(int argc, char **argv)
 
 	head = NULL;
 	nb = 0;
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (argv[i])
 	{
 		nb = ft_atoi(argv[i]);
-		if (i == 1)
+		if (i == 0)
 			head = new_node((int)nb);
 		else
 			push_back(head, (int)nb);
