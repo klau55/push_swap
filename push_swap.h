@@ -57,7 +57,8 @@ int			four_to_n(t_node **stack_a, t_node **stack_b);
 void		out(t_node *stack_a);
 
 char		**ft_split(char *s, char c);
-
+void		handle_error(t_node **stack_a, t_node **stack_b);
+void		free_stack(t_node **stack);
 
 int			main(int argc, char **argv);
 t_node		*populate_node(char **argv);

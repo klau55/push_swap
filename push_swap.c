@@ -33,10 +33,9 @@ int	three(t_node **stack)
 		sa(stack);
 	if (done_checker(*stack) == 1)
 	{
-		printf("*three fails\n");
+		handle_error(stack, NULL);
 		return (-1);
 	}
-	printf("*three exit sucks ess\n");
 	return (0);
 }
 
@@ -44,7 +43,7 @@ void	out(t_node *stack_a)
 {
 	while (stack_a)
 	{
-		printf("zhopa zhopa OUT: %d INDEX: %d\n", stack_a->num, stack_a->index);
+		printf("%d\n", stack_a->num);
 		stack_a = stack_a->next;
 	}
 }
@@ -56,8 +55,8 @@ int main(int argc, char **argv)
 	int		stack_len;
 	t_node	*head;
 
-	if (argc < 2 || (argc == 2 && !argv[1][0]))
-		return (printf("no go\n"));
+	if (argc < 2 || (argc && argv[argc][0] == '\0'))
+		return (0);
 	if (argc == 2)
 	{
 		argv = ft_split(argv[1], ' ');
@@ -66,26 +65,25 @@ int main(int argc, char **argv)
 		argv = argv + 1;
 	stack_a = populate_node(argv);
 	stack_b = NULL;
+	if (stack_a == NULL)
+		handle_error(&stack_a, &stack_b);
 	stack_len = len(stack_a);
 	head = stack_a;
 	if (stack_len == 1)
-		return (printf("OUT: %d INDEX: 0\n", stack_a->num));
+		return (0);
+		// 1 num should return nothing
 	else if (stack_len == 3 || stack_len == 2)
 	{
-		printf("*entered if for 2/3\n");
-		if (done_checker(stack_a) == 0)
-		{
-			printf("no sort needed, exit 3\n");
-		}
-		else
+		if (done_checker(stack_a) != 0)
 			three(&stack_a);
 	}
-	else if (stack_len > 4)
+	else if (stack_len > 3)
 	{
 		if (-1 == four_to_n(&stack_a, &stack_b))
-			return (-1);
+			handle_error(&stack_a, &stack_b);
 	}
 	out(stack_a);
-	//TODO: free stack
+	free_list(&stack_a);
+	free_list(&stack_b);
 	return (0);
 }

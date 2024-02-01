@@ -50,21 +50,6 @@ t_node	*new_node(int num)
 	return (new);
 }
 
-void	free_list(t_node **head)
-{
-	t_node	*tmp;
-
-	if (!head || !(*head))
-		return ;
-	while (*head)
-	{
-		tmp = (*head)->next;
-		free(*head);
-		*head = tmp;
-	}
-	*head = NULL;
-}
-
 void	increment_indexes(t_node *tail)
 {
 	while (tail)

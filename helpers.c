@@ -48,6 +48,8 @@ t_node	*populate_node(char **argv)
 	while (argv[i])
 	{
 		nb = ft_atoi(argv[i]);
+		if (nb > INT_MAX || nb < INT_MIN)
+			return (NULL);
 		if (i == 0)
 			head = new_node((int)nb);
 		else
