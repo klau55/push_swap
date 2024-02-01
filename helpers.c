@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/01 16:07:12 by nkarpilo          #+#    #+#             */
+/*   Updated: 2024/02/01 16:21:44 by nkarpilo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	ft_isdigit(int c)
@@ -47,6 +59,8 @@ t_node	*populate_node(char **argv)
 	i = 0;
 	while (argv[i])
 	{
+		if (argv[i][0] == '\0')
+			return (NULL);
 		nb = ft_atoi(argv[i]);
 		if (nb > INT_MAX || nb < INT_MIN)
 			return (NULL);

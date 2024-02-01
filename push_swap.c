@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/01 16:07:27 by nkarpilo          #+#    #+#             */
+/*   Updated: 2024/02/01 16:07:28 by nkarpilo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	done_checker(t_node *stack)
@@ -53,10 +65,9 @@ int main(int argc, char **argv)
 	t_node	*stack_a;
 	t_node	*stack_b;
 	int		stack_len;
-	t_node	*head;
 
-	if (argc < 2 || (argc && argv[argc][0] == '\0'))
-		return (0);
+	if (argc < 2 || (argc == 2 && !argv[1][0]) || argv[argc - 1][0] == '\0')
+		return (write(2, "Error!\n", 6));
 	if (argc == 2)
 	{
 		argv = ft_split(argv[1], ' ');
@@ -68,14 +79,19 @@ int main(int argc, char **argv)
 	if (stack_a == NULL)
 		handle_error(&stack_a, &stack_b);
 	stack_len = len(stack_a);
-	head = stack_a;
+	if (done_checker(stack_a) == 0)
+	{
+		out(stack_a);
+		free_list(&stack_a);
+		free_list(&stack_b);
+		return (0);
+	}
 	if (stack_len == 1)
 		return (0);
-		// 1 num should return nothing
 	else if (stack_len == 3 || stack_len == 2)
 	{
-		if (done_checker(stack_a) != 0)
-			three(&stack_a);
+		if (-1 == three(&stack_a))
+			handle_error(&stack_a, &stack_b);
 	}
 	else if (stack_len > 3)
 	{
