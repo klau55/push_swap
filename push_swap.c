@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:27 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/03 12:35:18 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/03 14:38:21 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ int	three(t_node **stack)
 	return (0);
 }
 
-void	out(t_node *stack_a)
+/*void	out(t_node *stack_a)
 {
 	while (stack_a)
 	{
 		printf("%d\n", stack_a->num);
 		stack_a = stack_a->next;
 	}
-}
+}*/
 
 int main(int argc, char **argv)
 {
@@ -68,7 +68,7 @@ int main(int argc, char **argv)
 
 	if (argc < 2 || (argc == 2 && !argv[1][0]) || argv[argc - 1][0] == '\0')
 	{
-		write(2, "Error!\n", 6);
+		write(2, "Error\n", 6);
 		return (0);
 	}
 	if (argc == 2)
@@ -86,9 +86,7 @@ int main(int argc, char **argv)
 		return (0);
 	if (done_checker(stack_a) == 0)
 	{
-		out(stack_a);
 		free_list(&stack_a);
-		free_list(&stack_b);
 		return (0);
 	}
 	else if (stack_len == 3 || stack_len == 2)
@@ -101,7 +99,7 @@ int main(int argc, char **argv)
 		if (-1 == four_to_n(&stack_a, &stack_b))
 			handle_error(&stack_a, &stack_b);
 	}
-	out(stack_a);
+	free(argv);
 	free_list(&stack_a);
 	free_list(&stack_b);
 	return (0);

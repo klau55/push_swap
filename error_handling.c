@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:06:47 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/01 16:06:48 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/03 14:07:35 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void	handle_error(t_node **stack_a, t_node **stack_b)
 		free_stack(stack_a);
 	if (stack_b == NULL || *stack_b != NULL)
 		free_list(stack_b);
-	write(2, "Error!\n", 6);
+	write(2, "Error\n", 6);
 	exit(1);
 }
