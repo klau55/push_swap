@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/02 14:59:58 by nkarpilo          #+#    #+#             */
+/*   Updated: 2024/02/02 15:19:45 by nkarpilo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -50,7 +62,7 @@ void		set_indexes(t_node *head);
 
 int			done_checker(t_node *stack_a);
 int			ft_isdigit(int c);
-int			ft_atoi(const char *str);
+int			ft_atoi(const char *str, t_node *head);
 int			two(t_node *stack_a);
 int			three(t_node **stack_a);
 int			four_to_n(t_node **stack_a, t_node **stack_b);

@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:12 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/01 16:21:44 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:20:02 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, t_node *head)
 {
 	int	i;
 	int	num;
@@ -42,7 +42,7 @@ int	ft_atoi(const char *str)
 		if (ft_isdigit(str[i]))
 			num = num * 10 + (str[i] - '0');
 		else
-			break ;
+			handle_error(&head, NULL);
 		i++;
 	}
 	return (num * neg);
@@ -61,7 +61,7 @@ t_node	*populate_node(char **argv)
 	{
 		if (argv[i][0] == '\0')
 			return (NULL);
-		nb = ft_atoi(argv[i]);
+		nb = ft_atoi(argv[i], head);
 		if (nb > INT_MAX || nb < INT_MIN)
 			return (NULL);
 		if (i == 0)

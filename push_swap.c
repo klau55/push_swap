@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:27 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/01 16:07:28 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/03 12:35:18 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ int main(int argc, char **argv)
 	int		stack_len;
 
 	if (argc < 2 || (argc == 2 && !argv[1][0]) || argv[argc - 1][0] == '\0')
-		return (write(2, "Error!\n", 6));
+	{
+		write(2, "Error!\n", 6);
+		return (0);
+	}
 	if (argc == 2)
 	{
 		argv = ft_split(argv[1], ' ');
@@ -79,6 +82,8 @@ int main(int argc, char **argv)
 	if (stack_a == NULL)
 		handle_error(&stack_a, &stack_b);
 	stack_len = len(stack_a);
+	if (stack_len == 1)
+		return (0);
 	if (done_checker(stack_a) == 0)
 	{
 		out(stack_a);
@@ -86,8 +91,6 @@ int main(int argc, char **argv)
 		free_list(&stack_b);
 		return (0);
 	}
-	if (stack_len == 1)
-		return (0);
 	else if (stack_len == 3 || stack_len == 2)
 	{
 		if (-1 == three(&stack_a))
