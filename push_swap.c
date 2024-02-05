@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:27 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/03 14:38:21 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/05 14:40:04 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ int main(int argc, char **argv)
 
 	if (argc < 2 || (argc == 2 && !argv[1][0]) || argv[argc - 1][0] == '\0')
 	{
-		write(2, "Error\n", 6);
-		return (0);
+		handle_error(NULL, NULL);
 	}
 	if (argc == 2)
 	{
@@ -80,12 +79,19 @@ int main(int argc, char **argv)
 	stack_a = populate_node(argv);
 	stack_b = NULL;
 	if (stack_a == NULL)
+	{
+		free(*argv);
 		handle_error(&stack_a, &stack_b);
+	}
 	stack_len = len(stack_a);
 	if (stack_len == 1)
-		return (0);
+	{
+		free(*argv);
+		handle_error(&stack_a, NULL);
+	}
 	if (done_checker(stack_a) == 0)
 	{
+		free(*argv);
 		free_list(&stack_a);
 		return (0);
 	}
@@ -99,7 +105,7 @@ int main(int argc, char **argv)
 		if (-1 == four_to_n(&stack_a, &stack_b))
 			handle_error(&stack_a, &stack_b);
 	}
-	free(argv);
+	free(*argv);
 	free_list(&stack_a);
 	free_list(&stack_b);
 	return (0);
