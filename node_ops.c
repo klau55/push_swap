@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:18 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/01 16:07:19 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:57:46 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_node	*new_node(int num)
 	new->top_part = true;
 	new->cheapest = false;
 	new->push_price = 0;
+	new->flag = 0;
 	new->next = NULL;
 	return (new);
 }

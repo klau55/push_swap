@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:12 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/03 14:37:22 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:15:43 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	repetition(t_node *stack, long int nb)
 	return (0);
 }
 
+
 t_node	*populate_node(char **argv)
 {
 	t_node		*head;
@@ -73,18 +74,20 @@ t_node	*populate_node(char **argv)
 	while (argv[i])
 	{
 		if (argv[i][0] == '\0')
-			return (NULL);
+		{
+			handle_error(&head, NULL);
+		}
 		nb = ft_atoi(argv[i], head);
-		if (nb > INT_MAX || nb < INT_MIN)
-			return (NULL);
-		if (repetition(head, nb) == 1)
-			return (NULL);
+		if ((nb > INT_MAX || nb < INT_MIN) || (repetition(head, nb) == 1))
+		{
+			handle_error(&head, NULL);
+		}
+		// shouldnt handle - in input w/o num
 		if (i == 0)
 			head = new_node((int)nb);
 		else
 			push_back(head, (int)nb);
 		i++;
 	}
-	//set_indexes(head);
 	return (head);
 }

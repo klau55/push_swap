@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:27 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/05 14:40:04 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:11:50 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,20 @@ int main(int argc, char **argv)
 	}
 	if (argc == 2)
 	{
+		// flag to c if argv = split
 		argv = ft_split(argv[1], ' ');
+		if (argv == NULL)
+			handle_error(&stack_a, &stack_b);
 	}
 	else
 		argv = argv + 1;
 	stack_a = populate_node(argv);
 	stack_b = NULL;
+	// while flag == 1 >> handle error
 	if (stack_a == NULL)
 	{
-		free(*argv);
+//		if (argv[1])
+//			free(argv);
 		handle_error(&stack_a, &stack_b);
 	}
 	stack_len = len(stack_a);
@@ -91,7 +96,7 @@ int main(int argc, char **argv)
 	}
 	if (done_checker(stack_a) == 0)
 	{
-		free(*argv);
+//		free(*argv);
 		free_list(&stack_a);
 		return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:59:58 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/03 14:38:01 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:58:41 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_node
 	bool			cheapest;
 	struct s_node	*target_node;
 	int				push_price;
+	int				flag;
 	struct s_node	*next;
 }	t_node;
 
