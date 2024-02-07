@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:27 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/07 17:28:50 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:39:55 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int main(int argc, char **argv)
 		handle_error(&stack_a, &stack_b);
 	}
 	stack_len = len(stack_a);
-	if (done_checker(stack_a) != 0 || stack_len > 1)
+	if (done_checker(stack_a) != 0 || stack_len < 1)
 	{
 		if (stack_len <= 3)
 		{
