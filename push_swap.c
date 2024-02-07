@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:27 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/06 17:11:50 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:28:50 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,66 +51,60 @@ int	three(t_node **stack)
 	return (0);
 }
 
-/*void	out(t_node *stack_a)
+void	ft_free(char **argv)
 {
-	while (stack_a)
-	{
-		printf("%d\n", stack_a->num);
-		stack_a = stack_a->next;
-	}
-}*/
+	int	i;
+
+	i = -1;
+	if (argv == NULL || *argv == NULL)
+		return ;
+	while (argv[++i])
+		free(argv[i]);
+	free(argv);
+}
 
 int main(int argc, char **argv)
 {
 	t_node	*stack_a;
 	t_node	*stack_b;
 	int		stack_len;
+	int		flag;
 
+	flag = 0;
 	if (argc < 2 || (argc == 2 && !argv[1][0]) || argv[argc - 1][0] == '\0')
-	{
-		handle_error(NULL, NULL);
-	}
+		return (0);
+	stack_b = NULL;
 	if (argc == 2)
 	{
 		// flag to c if argv = split
 		argv = ft_split(argv[1], ' ');
 		if (argv == NULL)
 			handle_error(&stack_a, &stack_b);
+		flag = 1;
 	}
 	else
 		argv = argv + 1;
-	stack_a = populate_node(argv);
-	stack_b = NULL;
-	// while flag == 1 >> handle error
+	stack_a = populate_node(argv, flag);
 	if (stack_a == NULL)
 	{
-//		if (argv[1])
-//			free(argv);
 		handle_error(&stack_a, &stack_b);
 	}
 	stack_len = len(stack_a);
-	if (stack_len == 1)
+	if (done_checker(stack_a) != 0 || stack_len > 1)
 	{
-		free(*argv);
-		handle_error(&stack_a, NULL);
+		if (stack_len <= 3)
+		{
+			if (-1 == three(&stack_a))
+				handle_error(&stack_a, &stack_b);
+		}
+		else if (stack_len > 3)
+		{
+			if (-1 == four_to_n(&stack_a, &stack_b))
+				handle_error(&stack_a, &stack_b);
+		}
 	}
-	if (done_checker(stack_a) == 0)
-	{
-//		free(*argv);
-		free_list(&stack_a);
-		return (0);
-	}
-	else if (stack_len == 3 || stack_len == 2)
-	{
-		if (-1 == three(&stack_a))
-			handle_error(&stack_a, &stack_b);
-	}
-	else if (stack_len > 3)
-	{
-		if (-1 == four_to_n(&stack_a, &stack_b))
-			handle_error(&stack_a, &stack_b);
-	}
-	free(*argv);
+	if (flag == 1)
+		ft_free(argv);
 	free_list(&stack_a);
 	free_list(&stack_b);
 	return (0);

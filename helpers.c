@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:12 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/06 17:15:43 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:22:31 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-int	ft_atoi(const char *str, t_node *head)
+long int	ft_atoi(const char *str, t_node *head)
 {
 	int	i;
-	int	num;
+	int long	num;
 	int	neg;
 
 	i = 0;
@@ -61,8 +61,26 @@ int	repetition(t_node *stack, long int nb)
 	return (0);
 }
 
+int	error_syntax(char *str_nbr)
+{
+	if (!(*str_nbr == '+'
+			|| *str_nbr == '-'
+			|| (*str_nbr >= '0' && *str_nbr <= '9')))
+		return (1);
+	if ((*str_nbr == '+'
+			|| *str_nbr == '-')
+		&& !(str_nbr[1] >= '0' && str_nbr[1] <= '9'))
+		return (1);
+	while (*++str_nbr)
+	{
+		if (!(*str_nbr >= '0' && *str_nbr <= '9'))
+			return (1);
+	}
+	return (0);
+}
 
-t_node	*populate_node(char **argv)
+
+t_node	*populate_node(char **argv, int flag)
 {
 	t_node		*head;
 	long int	nb;
@@ -73,16 +91,19 @@ t_node	*populate_node(char **argv)
 	i = 0;
 	while (argv[i])
 	{
-		if (argv[i][0] == '\0')
+		if ((argv[i][0] == '\0') || (error_syntax(argv[i])))
 		{
+			if (flag == 1)
+				free(*argv);
 			handle_error(&head, NULL);
 		}
 		nb = ft_atoi(argv[i], head);
 		if ((nb > INT_MAX || nb < INT_MIN) || (repetition(head, nb) == 1))
 		{
+			if (flag == 1)
+				free(*argv);
 			handle_error(&head, NULL);
 		}
-		// shouldnt handle - in input w/o num
 		if (i == 0)
 			head = new_node((int)nb);
 		else

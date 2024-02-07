@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:59:58 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/06 16:58:41 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:28:43 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		set_indexes(t_node *head);
 
 int			done_checker(t_node *stack_a);
 int			ft_isdigit(int c);
-int			ft_atoi(const char *str, t_node *head);
+long int	ft_atoi(const char *str, t_node *head);
 int			two(t_node *stack_a);
 int			three(t_node **stack_a);
 int			four_to_n(t_node **stack_a, t_node **stack_b);
@@ -71,8 +71,9 @@ int			four_to_n(t_node **stack_a, t_node **stack_b);
 char		**ft_split(char *s, char c);
 void		handle_error(t_node **stack_a, t_node **stack_b);
 void		free_stack(t_node **stack);
+void		ft_free(char **argv);
 
 int			main(int argc, char **argv);
-t_node		*populate_node(char **argv);
+t_node		*populate_node(char **argv, int flag);
 
 #endif
