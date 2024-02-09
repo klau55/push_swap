@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:58:39 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/09 15:14:59 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:31:02 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,16 @@ void	ft_putstr(char *s)
 		ft_putchar(*s);
 		s++;
 	}
+}
+
+void	ft_free(char **argv)
+{
+	int	i;
+
+	i = -1;
+	if (argv == NULL || *argv == NULL)
+		return ;
+	while (argv[++i])
+		free(argv[i]);
+	free(argv);
 }

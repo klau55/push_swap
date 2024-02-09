@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:27 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/09 15:15:25 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:31:14 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,43 +51,14 @@ int	three(t_node **stack)
 	return (0);
 }
 
-void	ft_free(char **argv)
+
+void	process_stacks(t_node *stack_a, t_node *stack_b, int flag, char **argv)
 {
-	int	i;
+	int	stack_len;
 
-	i = -1;
-	if (argv == NULL || *argv == NULL)
-		return ;
-	while (argv[++i])
-		free(argv[i]);
-	free(argv);
-}
-
-int	main(int argc, char **argv)
-{
-	t_node	*stack_a;
-	t_node	*stack_b;
-	int		stack_len;
-	int		flag;
-
-	flag = 0;
-	if (argc < 2 || (argc == 2 && !argv[1][0]) || argv[argc - 1][0] == '\0')
-		return (0);
-	stack_b = NULL;
-	if (argc == 2)
-	{
-		argv = ft_split(argv[1], ' ');
-		if (argv == NULL)
-			handle_error(&stack_a, &stack_b);
-		flag = 1;
-	}
-	else
-		argv = argv + 1;
 	stack_a = populate_node(argv, flag, 0, 0);
 	if (stack_a == NULL)
-	{
 		handle_error(&stack_a, &stack_b);
-	}
 	stack_len = len(stack_a);
 	if (done_checker(stack_a) != 0)
 	{
@@ -106,5 +77,31 @@ int	main(int argc, char **argv)
 		ft_free(argv);
 	free_list(&stack_a);
 	free_list(&stack_b);
+}
+
+int	main(int argc, char **argv)
+{
+	t_node	*stack_a;
+	t_node	*stack_b;
+	int		flag;
+
+	flag = 0;
+	if (argc < 2 || (argc == 2 && !argv[1][0]) || argv[argc - 1][0] == '\0')
+		return (0);
+	stack_a = NULL;
+	stack_b = NULL;
+	if (argc == 2)
+	{
+		argv = ft_split(argv[1], ' ');
+
+		if (argv == NULL)
+			handle_error(&stack_a, &stack_b);
+
+		flag = 1;
+	}
+	else
+		argv = argv + 1;
+	process_stacks(stack_a, stack_b, flag, argv);
+
 	return (0);
 }
