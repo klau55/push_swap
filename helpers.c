@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:12 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/07 17:22:31 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:09:19 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	ft_isdigit(int c)
 
 long int	ft_atoi(const char *str, t_node *head)
 {
-	int	i;
+	int			i;
 	int long	num;
-	int	neg;
+	int			neg;
 
 	i = 0;
 	num = 0;
@@ -77,38 +77,4 @@ int	error_syntax(char *str_nbr)
 			return (1);
 	}
 	return (0);
-}
-
-
-t_node	*populate_node(char **argv, int flag)
-{
-	t_node		*head;
-	long int	nb;
-	int			i;
-
-	head = NULL;
-	nb = 0;
-	i = 0;
-	while (argv[i])
-	{
-		if ((argv[i][0] == '\0') || (error_syntax(argv[i])))
-		{
-			if (flag == 1)
-				free(*argv);
-			handle_error(&head, NULL);
-		}
-		nb = ft_atoi(argv[i], head);
-		if ((nb > INT_MAX || nb < INT_MIN) || (repetition(head, nb) == 1))
-		{
-			if (flag == 1)
-				free(*argv);
-			handle_error(&head, NULL);
-		}
-		if (i == 0)
-			head = new_node((int)nb);
-		else
-			push_back(head, (int)nb);
-		i++;
-	}
-	return (head);
 }

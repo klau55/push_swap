@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:02 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/01 16:07:03 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/09 14:28:00 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,8 @@ static void	move_nodes(t_node **a, t_node **b)
 	cheapest_node = return_cheapest(*b);
 	if (cheapest_node->top_part && cheapest_node->target_node->top_part)
 		rotate_both(a, b, cheapest_node);
-	else if (!(cheapest_node->top_part) && !(cheapest_node->target_node->top_part))
+	else if (!(cheapest_node->top_part) && \
+	!(cheapest_node->target_node->top_part))
 		rev_rotate_both(a, b, cheapest_node);
 	finish_rotation(b, cheapest_node, 'b');
 	finish_rotation(a, cheapest_node->target_node, 'a');
