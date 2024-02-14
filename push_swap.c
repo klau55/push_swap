@@ -6,7 +6,7 @@
 /*   By: nkarpilo <nkarpilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:07:27 by nkarpilo          #+#    #+#             */
-/*   Updated: 2024/02/09 16:31:14 by nkarpilo         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:10:49 by nkarpilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,32 +51,31 @@ int	three(t_node **stack)
 	return (0);
 }
 
-
-void	process_stacks(t_node *stack_a, t_node *stack_b, int flag, char **argv)
+void	process_stacks(t_node *a, t_node *b, int flag, char **argv)
 {
 	int	stack_len;
 
-	stack_a = populate_node(argv, flag, 0, 0);
-	if (stack_a == NULL)
-		handle_error(&stack_a, &stack_b);
-	stack_len = len(stack_a);
-	if (done_checker(stack_a) != 0)
+	a = populate_node(argv, flag, 0, 0);
+	if (a == NULL)
+		handle_error(&a, &b);
+	stack_len = len(a);
+	if (done_checker(a) != 0)
 	{
 		if (stack_len <= 3)
 		{
-			if (-1 == three(&stack_a))
-				handle_error(&stack_a, &stack_b);
+			if (-1 == three(&a))
+				handle_error(&a, &b);
 		}
 		else if (stack_len > 3)
 		{
-			if (-1 == four_to_n(&stack_a, &stack_b))
-				handle_error(&stack_a, &stack_b);
+			if (-1 == four_to_n(&a, &b))
+				handle_error(&a, &b);
 		}
 	}
 	if (flag == 1)
 		ft_free(argv);
-	free_list(&stack_a);
-	free_list(&stack_b);
+	free_list(&a);
+	free_list(&b);
 }
 
 int	main(int argc, char **argv)
@@ -93,15 +92,12 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		argv = ft_split(argv[1], ' ');
-
 		if (argv == NULL)
 			handle_error(&stack_a, &stack_b);
-
 		flag = 1;
 	}
 	else
 		argv = argv + 1;
 	process_stacks(stack_a, stack_b, flag, argv);
-
 	return (0);
 }
